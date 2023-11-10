@@ -16,5 +16,8 @@ COPY . /var/www/html
 # Instale as dependências do Composer
 RUN composer install
 
+# Instale a ferramenta wait-for-it
+RUN apt-get update && apt-get install -y wait-for-it
+
 # Exponha a porta 8000 (ou a porta que desejar)
 EXPOSE 8000
