@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  database:
+    image: mysql:8
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: chirper
+      MYSQL_USER: laravel_user
+      MYSQL_PASSWORD: laravel_password
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    command: ["bash", "-c", "php artisan migrate && php artisan serve --host=0.0.0.0 --port=8000"]
